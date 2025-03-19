@@ -1,9 +1,19 @@
 from src.model.diccionario import Diccionario
 from src.model.adivinanza import Adivinanza
 from src.model.error_intentos_insuficientes import ErrorIntentosInsuficientes
+from typing import List
 
 
 class Juego:
+    """
+        Representa el juego a ejecutar
+
+        Atributos:
+            self.__dificultad(str): Representa la dificultad del juego, baja, media o alta
+            self.__intentos_realizados(int): Los intentos que ha realizado el usuario por adivinar la palabra
+            self.__diccionario(Diccionario): Diccionario de palabras y letras a usar en el juego
+            self.__adivinanza(Adivinanza): La adivinanza para el juego
+    """
     DIFICULTAD_BAJA = "DIFICULTAD_BAJA"
     DIFICULTAD_MEDIA = "DIFICULTAD_MEDIA"
     DIFICULTAD_ALTA = "DIFICULTAD_ALTA"
@@ -17,10 +27,22 @@ class Juego:
         self.__diccionario = Diccionario()
         self.__adivinanza: Adivinanza = None
 
-    def obtener_intentos_realizados(self):
+    def obtener_intentos_realizados(self) -> int:
+        """
+            Metodo para obtener la cantidad de intentos realizados
+
+            Returns:
+                int: Número de intentos realizados por el usuario
+        """
         return self.__intentos_realizados
 
     def obtener_adivinanza(self) -> Adivinanza:
+        """
+            Metodo para obtener la adivinanza para uasr en el juego
+
+            Returns:
+                Adivinanza: Instancia de la clase adivinanza con la palabra a usar en el juego
+        """
         return self.__adivinanza
 
     def __generar_palabra(self) -> str:
@@ -45,7 +67,7 @@ class Juego:
         self.__intentos_realizados = self.calcular_intentos_permitidos()
         return self.__adivinanza.obtener_cantidad_posiciones()
 
-    def adivinar(self, letra: str) -> [int]:
+    def adivinar(self, letra: str) -> List[int]:
         """
             Intenta adivinar una letra de la palabra.
 
