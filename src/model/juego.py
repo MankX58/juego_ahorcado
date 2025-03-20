@@ -46,9 +46,18 @@ class Juego:
         return self.__adivinanza
 
     def __generar_palabra(self) -> str:
+        """
+            Metodo para obtener una palabra del diccionario
+        """
         return self.__diccionario.obtener_palabra()
 
     def calcular_intentos_permitidos(self) -> int:
+        """
+            Calcula la cantidad de intentos permitidos según la dificultad del juego.
+
+            Returns:
+                int: Cantidad de intentos permitidos.
+        """
         if self.__dificultad == self.DIFICULTAD_BAJA:
             return 20
         if self.__dificultad == self.DIFICULTAD_MEDIA:
@@ -59,9 +68,21 @@ class Juego:
         return 0
 
     def modificar_dificultad(self, dificultad: str) -> None:
+        """
+            Modifica la dificultad del juego.
+
+            Args:
+                dificultad (str): Dificultad a asignar al juego.
+        """
         self.__dificultad = dificultad
 
     def iniciar_partida(self) -> int:
+        """
+            Inicia una nueva partida.
+
+            Returns:
+                int: Cantidad de posiciones de la palabra a adivinar.
+        """
         palabra = self.__generar_palabra()
         self.__adivinanza: Adivinanza = Adivinanza(palabra)
         self.__intentos_realizados = self.calcular_intentos_permitidos()
@@ -86,7 +107,19 @@ class Juego:
         return self.__adivinanza.adivinar(letra)
 
     def verificar_si_hay_intentos(self) -> bool:
+        """
+            Verifica si el jugador aún tiene intentos disponibles.
+
+            Returns:
+                bool: True si quedan intentos, False si no.
+        """
         return self.__intentos_realizados >= 0
 
     def verificar_triunfo(self) -> bool:
+        """
+            Verifica si el jugador ha ganado.
+
+            Returns:
+                bool: True si el jugador ha ganado, False si no.
+        """
         return self.__adivinanza.verificar_si_hay_triunfo()
